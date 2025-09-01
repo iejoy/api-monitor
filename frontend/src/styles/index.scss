@@ -1,0 +1,513 @@
+// 导入NProgress样式
+@import 'nprogress/nprogress.css';
+
+// 全局变量
+:root {
+  --sidebar-width: 240px;
+  --sidebar-collapsed-width: 64px;
+  --header-height: 60px;
+  --border-radius: 6px;
+  --box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+  
+  // 字体变量
+  --custom-font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+  --custom-font-size-base: 14px;
+  --custom-font-size-small: 12px;
+  --custom-font-size-large: 16px;
+  --custom-font-size-xl: 18px;
+  --custom-font-weight-normal: 400;
+  --custom-font-weight-medium: 500;
+  --custom-font-weight-bold: 600;
+  
+  // 自定义颜色变量
+  --custom-bg-color: #ffffff;
+  --custom-bg-color-page: #f5f7fa;
+  --custom-text-color-primary: #303133;
+  --custom-text-color-regular: #606266;
+  --custom-text-color-secondary: #909399;
+  --custom-border-color: #dcdfe6;
+  --custom-border-color-light: #e4e7ed;
+  --custom-border-color-lighter: #ebeef5;
+  --custom-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --custom-box-shadow-light: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+}
+
+// 暗色主题变量
+html.dark {
+  --custom-bg-color: #1d1e1f;
+  --custom-bg-color-page: #0a0a0a;
+  --custom-text-color-primary: #e5eaf3;
+  --custom-text-color-regular: #cfd3dc;
+  --custom-text-color-secondary: #a3a6ad;
+  --custom-border-color: #4c4d4f;
+  --custom-border-color-light: #414243;
+  --custom-border-color-lighter: #363637;
+  --custom-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  --custom-box-shadow-light: 0 2px 12px 0 rgba(0, 0, 0, 0.3);
+}
+
+// 重置样式
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: var(--custom-font-family);
+  font-size: var(--custom-font-size-base);
+  font-weight: var(--custom-font-weight-normal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// 统一字体样式
+body, input, textarea, select, button {
+  font-family: var(--custom-font-family) !important;
+}
+
+// Element Plus 组件字体统一
+.el-button, .el-input, .el-select, .el-table, .el-form-item__label,
+.el-menu, .el-breadcrumb, .el-radio-group, .el-checkbox, .el-switch,
+.el-tooltip, .el-popover, .el-dialog, .el-message, .el-notification {
+  font-family: var(--custom-font-family) !important;
+}
+
+// 布局样式
+.layout {
+  display: flex;
+  height: 100vh;
+  
+  &-sidebar {
+    width: var(--sidebar-width);
+    transition: var(--transition);
+    
+    &.collapsed {
+      width: var(--sidebar-collapsed-width);
+    }
+  }
+  
+  &-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  
+  &-header {
+    height: var(--header-height);
+    border-bottom: 1px solid var(--el-border-color-light);
+    background: var(--el-bg-color);
+  }
+  
+  &-content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background: var(--el-bg-color-page);
+  }
+}
+
+// 卡片样式
+.card {
+  background: var(--custom-bg-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--custom-box-shadow-light);
+  padding: 20px;
+  margin-bottom: 20px;
+  
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--custom-border-color-lighter);
+    
+    h3 {
+      margin: 0;
+      font-size: var(--custom-font-size-xl);
+      font-weight: var(--custom-font-weight-bold);
+      font-family: var(--custom-font-family);
+      color: var(--custom-text-color-primary);
+    }
+  }
+  
+  &-body {
+    color: var(--custom-text-color-regular);
+    font-family: var(--custom-font-family);
+  }
+}
+
+// 状态样式
+.status {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: var(--custom-font-size-small);
+  font-weight: var(--custom-font-weight-medium);
+  font-family: var(--custom-font-family);
+  
+  &-success {
+    background: var(--el-color-success-light-9);
+    color: var(--el-color-success);
+    border: 1px solid var(--el-color-success-light-7);
+  }
+  
+  &-warning {
+    background: var(--el-color-warning-light-9);
+    color: var(--el-color-warning);
+    border: 1px solid var(--el-color-warning-light-7);
+  }
+  
+  &-danger {
+    background: var(--el-color-danger-light-9);
+    color: var(--el-color-danger);
+    border: 1px solid var(--el-color-danger-light-7);
+  }
+  
+  &-info {
+    background: var(--el-color-info-light-9);
+    color: var(--el-color-info);
+    border: 1px solid var(--el-color-info-light-7);
+  }
+  
+  &-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    margin-right: 6px;
+    
+    &.success {
+      background: var(--el-color-success);
+    }
+    
+    &.warning {
+      background: var(--el-color-warning);
+    }
+    
+    &.danger {
+      background: var(--el-color-danger);
+    }
+    
+    &.info {
+      background: var(--el-color-info);
+    }
+  }
+}
+
+// 统计卡片
+.stat-card {
+  background: var(--custom-bg-color);
+  border-radius: var(--border-radius);
+  text-align: center;
+  transition: var(--transition);
+  border: 1px solid var(--custom-border-color-lighter);
+  
+  &:hover {
+    box-shadow: var(--custom-box-shadow-light);
+    transform: translateY(-2px);
+  }
+  
+  &-icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+    
+    &.primary {
+      color: var(--el-color-primary);
+    }
+    
+    &.success {
+      color: var(--el-color-success);
+    }
+    
+    &.warning {
+      color: var(--el-color-warning);
+    }
+    
+    &.danger {
+      color: var(--el-color-danger);
+    }
+  }
+  
+  &-value {
+    font-size: 28px;
+    font-weight: var(--custom-font-weight-bold);
+    font-family: var(--custom-font-family);
+    color: var(--custom-text-color-primary);
+    margin-bottom: 8px;
+  }
+  
+  &-label {
+    font-size: var(--custom-font-size-base);
+    font-family: var(--custom-font-family);
+    color: var(--custom-text-color-regular);
+  }
+}
+
+// 工具类
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.mb-0 {
+  margin-bottom: 0 !important;
+}
+
+.mb-1 {
+  margin-bottom: 8px !important;
+}
+
+.mb-2 {
+  margin-bottom: 16px !important;
+}
+
+.mb-3 {
+  margin-bottom: 24px !important;
+}
+
+.mt-0 {
+  margin-top: 0 !important;
+}
+
+.mt-1 {
+  margin-top: 8px !important;
+}
+
+.mt-2 {
+  margin-top: 16px !important;
+}
+
+.mt-3 {
+  margin-top: 24px !important;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+// 响应式
+@media (max-width: 768px) {
+  .layout {
+    &-sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      height: 100vh;
+      z-index: 1000;
+      transform: translateX(-100%);
+      
+      &.show {
+        transform: translateX(0);
+      }
+    }
+    
+    &-main {
+      margin-left: 0;
+    }
+    
+    &-content {
+      padding: 16px;
+    }
+  }
+  
+  .stat-card {
+    margin-bottom: 16px;
+  }
+}
+
+// NProgress自定义样式
+#nprogress {
+  .bar {
+    background: var(--el-color-primary) !important;
+    height: 3px !important;
+  }
+  
+  .peg {
+    box-shadow: 0 0 10px var(--el-color-primary), 0 0 5px var(--el-color-primary) !important;
+  }
+}
+
+// 滚动条样式
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--el-bg-color-page);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--el-border-color-light);
+  border-radius: 3px;
+  
+  &:hover {
+    background: var(--el-border-color);
+  }
+}
+
+// 动画
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+// 表格样式增强
+.el-table {
+  font-family: var(--custom-font-family) !important;
+  
+  .el-table__header {
+    th {
+      background: var(--el-bg-color-page);
+      color: var(--el-text-color-primary);
+      font-weight: var(--custom-font-weight-bold);
+      font-family: var(--custom-font-family) !important;
+    }
+  }
+  
+  .el-table__row {
+    font-family: var(--custom-font-family) !important;
+    
+    &:hover {
+      background: var(--el-bg-color-page);
+    }
+  }
+  
+  .el-table__cell {
+    font-family: var(--custom-font-family) !important;
+  }
+}
+
+// 表单样式增强
+.form-container {
+  max-width: 600px;
+  margin: 0 auto;
+  
+  .el-form-item {
+    margin-bottom: 24px;
+    
+    .el-form-item__label {
+      font-family: var(--custom-font-family) !important;
+      font-weight: var(--custom-font-weight-medium);
+    }
+  }
+  
+  .el-input__inner, .el-textarea__inner {
+    font-family: var(--custom-font-family) !important;
+  }
+}
+
+// 自定义样式类，用于替换硬编码颜色
+.custom-bg {
+  background-color: var(--custom-bg-color) !important;
+}
+
+.custom-bg-page {
+  background-color: var(--custom-bg-color-page) !important;
+}
+
+.custom-text-primary {
+  color: var(--custom-text-color-primary) !important;
+  font-family: var(--custom-font-family) !important;
+}
+
+.custom-text-regular {
+  color: var(--custom-text-color-regular) !important;
+  font-family: var(--custom-font-family) !important;
+}
+
+.custom-text-secondary {
+  color: var(--custom-text-color-secondary) !important;
+  font-family: var(--custom-font-family) !important;
+}
+
+.custom-border {
+  border-color: var(--custom-border-color) !important;
+}
+
+.custom-border-light {
+  border-color: var(--custom-border-color-light) !important;
+}
+
+.custom-border-lighter {
+  border-color: var(--custom-border-color-lighter) !important;
+}
+
+.custom-shadow {
+  box-shadow: var(--custom-box-shadow) !important;
+}
+
+.custom-shadow-light {
+  box-shadow: var(--custom-box-shadow-light) !important;
+}
+
+// 字体工具类
+.font-small {
+  font-size: var(--custom-font-size-small) !important;
+  font-family: var(--custom-font-family) !important;
+}
+
+.font-base {
+  font-size: var(--custom-font-size-base) !important;
+  font-family: var(--custom-font-family) !important;
+}
+
+.font-large {
+  font-size: var(--custom-font-size-large) !important;
+  font-family: var(--custom-font-family) !important;
+}
+
+.font-xl {
+  font-size: var(--custom-font-size-xl) !important;
+  font-family: var(--custom-font-family) !important;
+}
+
+.font-normal {
+  font-weight: var(--custom-font-weight-normal) !important;
+}
+
+.font-medium {
+  font-weight: var(--custom-font-weight-medium) !important;
+}
+
+.font-bold {
+  font-weight: var(--custom-font-weight-bold) !important;
+}

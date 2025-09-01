@@ -1,0 +1,49 @@
+**/target
+.idea/
+.gradle/
+build/
+logs
+
+
+# 依赖目录
+node_modules/
+
+# 构建输出
+dist/
+dist-ssr/
+*.zip
+
+# 环境变量
+!.env.example
+
+# 编辑器配置
+.vscode/
+.idea/
+
+# 操作系统文件
+.DS_Store
+Thumbs.db
+
+# 测试覆盖率
+coverage/
+.nyc_output/
+
+# 锁文件
+package-lock.json
+yarn.lock
+*/pnpm-lock.yaml
+pnpm-lock.yaml
+
+# 本地配置文件
+*.local
+
+# 调试文件
+*.log
+*.pid
+
+# AI编程助手配置文件
+.cursor/
+.superdesign/
+.windsurfrules
+.roocode/
+CLAUDE.md
